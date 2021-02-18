@@ -28,7 +28,7 @@ class Register extends Component {
         this.props.register(obj);
         el.preventDefault()
         this.hapus()
-        alert("Registasi")
+        alert("Berhasil Registrasi")
         this.props.history.push("/")
         
 
@@ -74,7 +74,7 @@ class Register extends Component {
                     </div> */}
                     <div>
                     <button type="submit" value="submit" onClick={this.setRegister} >Sign Up</button>
-                        
+                    <button onClick={() => this.props.history.push("/")}>Login</button>    
                     </div>
                     <div>
 

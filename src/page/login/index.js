@@ -27,30 +27,35 @@ class Login extends Component {
 
     }
 
-    doLogin = (e) => {
+    doLogin = () => {
 
         const { username, password } = this.state
         const { dataUser } = this.props
         let find = dataUser.filter(users => {
             return users.username === username && users.password === password
         })
+        let find1 = dataUser.filter(users => {
+            return users.username === username 
+        })
+        console.log("find1",find1[0]);
         console.log("find", find);
 
         if (find.length > 0) {
             alert("Login Sukses")
-            this.props.submitLogin({ username })
+            this.props.submitLogin( find1[0] )
+            this.props.history.push("/home")
         } else {
             alert("gagal")
         }
-        e.preventDefault()
+        // e.preventDefault()
     }
 
 
     render() {
         console.log(this.props.statusLogin)
-        console.log("heey",this.props.history)
-        if (this.props.statusLogin)
-            return <Redirect to="/" />
+        console.log("hey",this.props.history)
+        // if (this.props.statusLogin)
+        //     return <Redirect to="/home" />
         return (
             <div>
                 <div>SILAHKAN LOGIN</div>
@@ -63,7 +68,7 @@ class Login extends Component {
                     <input type="password" name="password" onChange={this.setValue} />
                 </div>
                 <div>
-                    <button type="submit" name="submit" onClick={(e) => this.doLogin(e)}>Login</button>
+                    <button type="button" name="submit" onClick={() => this.doLogin()}>Login</button>
                     <button onClick={() => this.props.history.push("/register")}>Register</button>
                     
                 </div>
@@ -71,15 +76,15 @@ class Login extends Component {
         );
     }
 }
-
+//ketika mengambil data dari luar kelas
 const mapStateToProps = state => ({
     dataUser: state.UReducer.users,
     statusLogin: state.AReducer.isLogin
 
 })
-
+//mengubah data kereducer
 const mapDispatchToProps = dispatch => ({
-    submitLogin: () => dispatch({ type: "LOGIN_SUCCESS" })
+    submitLogin: (data) => dispatch({ type: "LOGIN_SUCCESS",payload:data })
 })
 
 export default (connect(mapStateToProps, mapDispatchToProps))(Login);

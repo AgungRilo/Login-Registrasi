@@ -9,7 +9,11 @@ const userReducer = (state = defaultState, action) => {
             let newData={
                 id:state.id++,
                 username:action.payload.username,
-                password:action.payload.password
+                password:action.payload.password,
+                hp:action.payload.hp,
+                email:action.payload.email,
+                role:action.payload.role
+
             }
             let user=state.users.concat(newData);
             console.log(user);

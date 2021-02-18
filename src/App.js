@@ -10,13 +10,17 @@ class App extends Component {
     super(props);
     this.state = {}
   }
-
+  goToPage = page =>{
+    this.setState({
+      currentPage:"login"
+    })
+  }
   render() {
     return (
       <Router>
         <Header />
-        <Nav />
-        <Body />
+        <Nav page={this.state.currentPage} changePage ={this.goToPage}/>
+        <Body page={this.state.currentPage}/>
         <Footer />
       </Router>
     );

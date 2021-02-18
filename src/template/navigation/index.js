@@ -13,7 +13,24 @@ class Nav extends Component {
         console.log(this.props.statusLogin)
         return (
             <div>
-               Ini Nav
+               {
+                    this.props.statusLogin &&
+                    <Link to="/home">
+                        <Menu redirect={() => changePage("home")}>Home</Menu>
+                    </Link>
+
+                 }
+                {
+                    !this.props.statusLogin && 
+                    <>
+                         <Link to="/register">
+                             <Menu redirect={() => changePage("register")}></Menu>
+                         </Link>
+                        <Link to="/">
+                            <Menu redirect={() => changePage("login")}></Menu>
+                        </Link>
+                     </>
+                }
             </div>
         );
     }
